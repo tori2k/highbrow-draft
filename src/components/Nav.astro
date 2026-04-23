@@ -43,6 +43,11 @@ const items = [
     background: rgba(15,12,11,0.72);
     border-bottom: 1px solid rgba(245,241,232,0.08);
   }
+  .nav.open {
+    z-index: 100;
+    background: var(--color-bg);
+    backdrop-filter: none;
+  }
   .nav__inner {
     display: flex;
     align-items: center;
@@ -139,23 +144,26 @@ const items = [
   }
 
   .nav__mobile {
-    position: absolute;
-    top: 100%; left: 0; right: 0;
-    background: rgba(15,12,11,0.98);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--color-border);
+    position: fixed;
+    top: 74px; left: 0; right: 0;
+    bottom: 0;
+    background: var(--color-bg);
     flex-direction: column;
-    padding: 24px 28px 32px;
-    gap: 4px;
+    padding: 32px 28px 40px;
+    gap: 0;
     display: none;
+    overflow-y: auto;
+    z-index: 100;
   }
   .nav__mobile.open { display: flex; }
   .nav__mobile a {
     font-family: var(--font-display);
-    font-size: 22px;
+    font-weight: 300;
+    font-size: 32px;
+    letter-spacing: -0.02em;
     color: var(--color-text);
     text-decoration: none;
-    padding: 12px 0;
+    padding: 18px 0;
     border-bottom: 1px solid var(--color-border);
   }
   .nav__book--mobile {
@@ -175,6 +183,13 @@ const items = [
 <script>
   const burger = document.getElementById('navBurger');
   const mobile = document.getElementById('navMobile');
-  burger?.addEventListener('click', () => mobile?.classList.toggle('open'));
-  mobile?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => mobile.classList.remove('open')));
+  const nav = document.querySelector('.nav');
+  burger?.addEventListener('click', () => {
+    mobile?.classList.toggle('open');
+    nav?.classList.toggle('open');
+  });
+  mobile?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => {
+    mobile.classList.remove('open');
+    nav?.classList.remove('open');
+  }));
 </script>
