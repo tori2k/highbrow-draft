@@ -1,0 +1,143 @@
+---
+---
+<footer class="footer">
+  <div class="container-x">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <span class="footer__mark">◒</span>
+        <span class="footer__word">high<em>b</em>row</span>
+        <span class="footer__sub">beauty library · Москва</span>
+      </div>
+      <div class="footer__links">
+        <div class="footer__col">
+          <div class="footer__col-title">Навигация</div>
+          <a href="#services">Услуги</a>
+          <a href="#masters">Мастера</a>
+          <a href="#school">Школа</a>
+          <a href="#locations">Адреса</a>
+        </div>
+        <div class="footer__col">
+          <div class="footer__col-title">Связь</div>
+          <a href="https://t.me/highbrow_msk" target="_blank" rel="noopener">Telegram</a>
+          <a href="https://wa.me/79197745333" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="https://www.instagram.com/highbrow.msk" target="_blank" rel="noopener">Instagram</a>
+          <a href="tel:+79197745333">+7 (919) 774-53-33</a>
+        </div>
+        <div class="footer__col">
+          <div class="footer__col-title">Адреса</div>
+          <a href="https://yandex.ru/maps/org/highbrow/192249840698/" target="_blank" rel="noopener">Малый Кисловский, 7</a>
+          <a href="https://yandex.ru/maps/" target="_blank" rel="noopener">Мясницкая, 41</a>
+          <span class="footer__hours">Ежедневно, 10:00 — 22:00</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>© {new Date().getFullYear()} Highbrow · Бьюти-библиотека</span>
+      <span class="footer__made">Сайт — Кирилл Барыев</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--color-text);
+    color: var(--color-bg);
+    padding: 100px 0 30px;
+  }
+  .footer__top {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 60px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid rgba(245,241,232,0.12);
+  }
+  .footer__brand {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: var(--color-bg);
+  }
+  .footer__word {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 44px;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    display: inline-block;
+    color: var(--color-bg);
+  }
+  .footer__word em {
+    font-style: italic;
+    color: var(--color-brand);
+    font-weight: 300;
+  }
+  .footer__mark {
+    color: var(--color-brand);
+    font-size: 24px;
+    display: block;
+    line-height: 1;
+  }
+  .footer__sub {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(245,241,232,0.6);
+    margin-top: 10px;
+  }
+
+  .footer__links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+  .footer__col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .footer__col-title {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-brand);
+    margin-bottom: 10px;
+  }
+  .footer__col a,
+  .footer__col span {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: rgba(245,241,232,0.85);
+    text-decoration: none;
+    transition: color 0.25s;
+  }
+  .footer__col a:hover { color: var(--color-brand); }
+  .footer__hours {
+    font-size: 12px;
+    color: rgba(245,241,232,0.55);
+    font-family: var(--font-mono);
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+
+  .footer__bottom {
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: rgba(245,241,232,0.55);
+  }
+
+  @media (max-width: 900px) {
+    .footer { padding: 70px 0 24px; }
+    .footer__top { grid-template-columns: 1fr; gap: 40px; }
+    .footer__links { grid-template-columns: 1fr 1fr; gap: 28px; }
+  }
+</style>

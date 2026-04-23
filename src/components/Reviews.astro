@@ -1,0 +1,155 @@
+---
+const base = import.meta.env.BASE_URL;
+
+const reviews = [
+  {
+    text: 'Рекомендую тем, кто любит комфорт. Забота начинается с&nbsp;записи — подробный маршрут, напоминание о&nbsp;процедуре.',
+    author: 'Елена',
+    source: 'Yandex',
+  },
+  {
+    text: 'Highbrow — салон, где о&nbsp;вас действительно заботятся. Всегда найдут удобное окошко, внимательные администраторы.',
+    author: 'Ольга',
+    source: 'Yandex',
+  },
+  {
+    text: 'Просто любимый салон в&nbsp;Москве. Золотые мастера, атмосфера как у&nbsp;подруги дома — уходишь другим человеком.',
+    author: 'Мария',
+    source: '2ГИС',
+  },
+];
+---
+<section class="reviews">
+  <div class="container-x">
+    <div class="reviews__head">
+      <div class="reviews__left reveal-left">
+        <div class="sec-tag">Что говорят клиенты</div>
+        <h2 class="display-h">
+          <em>5.0</em> / 5.0<br/>
+          на&nbsp;основе 280&nbsp;отзывов
+        </h2>
+        <div class="reviews__meta">
+          <span class="reviews__src">Yandex Карты · 280 отзывов</span>
+          <span class="reviews__dot">·</span>
+          <span class="reviews__src">2ГИС · 30 отзывов</span>
+        </div>
+      </div>
+
+      <div class="reviews__photo reveal-right" data-parallax="0.05">
+        <img src={`${base}media/salon-wide.jpg`} alt="Интерьер студии" loading="lazy" />
+      </div>
+    </div>
+
+    <div class="reviews__grid">
+      {reviews.map((r, i) => (
+        <figure class="rcard reveal" style={`transition-delay: ${i * 0.1}s`}>
+          <div class="rcard__mark">&ldquo;</div>
+          <blockquote set:html={r.text}></blockquote>
+          <figcaption>
+            <span class="rcard__author">{r.author}</span>
+            <span class="rcard__src">{r.source}</span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .reviews { padding: 160px 0; }
+  .reviews__head {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    margin-bottom: 80px;
+    align-items: end;
+  }
+  .reviews__meta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-muted-2);
+  }
+  .reviews__dot { color: var(--color-brand); }
+
+  .reviews__photo {
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+  .reviews__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .reviews__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .rcard {
+    position: relative;
+    padding: 56px 36px 36px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    margin: 0;
+    transition: transform 0.5s cubic-bezier(.22,1,.36,1), border-color 0.3s;
+  }
+  .rcard:hover {
+    transform: translateY(-6px);
+    border-color: rgba(162,46,31,0.35);
+  }
+  .rcard__mark {
+    position: absolute;
+    top: 10px;
+    left: 24px;
+    font-family: var(--font-display);
+    font-size: 96px;
+    line-height: 1;
+    color: var(--color-brand);
+    opacity: 0.35;
+    pointer-events: none;
+  }
+  .rcard blockquote {
+    margin: 0 0 28px;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--color-text);
+  }
+  .rcard figcaption {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-border);
+  }
+  .rcard__author {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 15px;
+    color: var(--color-text);
+  }
+  .rcard__src {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-muted-2);
+  }
+
+  @media (max-width: 900px) {
+    .reviews { padding: 90px 0; }
+    .reviews__head { grid-template-columns: 1fr; gap: 40px; }
+    .reviews__photo { max-height: 60vh; }
+    .reviews__grid { grid-template-columns: 1fr; }
+  }
+</style>

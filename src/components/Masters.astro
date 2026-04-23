@@ -1,0 +1,120 @@
+---
+const masters = [
+  { name: 'Саша', role: 'Основатель · архитектура бровей', initials: 'С' },
+  { name: 'Виктория', role: 'Мастер-бровист', initials: 'В' },
+  { name: 'Анастасия', role: 'Мастер-бровист', initials: 'А' },
+  { name: 'Арина', role: 'Ламинирование ресниц', initials: 'А' },
+  { name: 'Павел', role: 'Парикмахер-стилист', initials: 'П' },
+  { name: 'Леонардо', role: 'Парикмахер-колорист', initials: 'Л' },
+  { name: 'Дарья', role: 'Визажист', initials: 'Д' },
+];
+---
+<section class="masters" id="masters">
+  <div class="container-x">
+    <div class="masters__head reveal">
+      <div class="sec-tag">Команда</div>
+      <h2 class="display-h masters__title">
+        <em>Те самые</em>,<br/>
+        к кому возвращаются
+      </h2>
+      <p class="masters__lead">
+        Небольшая команда мастеров, которые работают&nbsp;с&nbsp;нами годами. У&nbsp;каждой клиентки — свой мастер, и&nbsp;это не&nbsp;случайность, а&nbsp;принцип.
+      </p>
+    </div>
+
+    <div class="masters__grid">
+      {masters.map((m, i) => (
+        <article class="mcard reveal" style={`transition-delay: ${i * 0.06}s`}>
+          <div class="mcard__avatar">
+            <span class="mcard__initials">{m.initials}</span>
+          </div>
+          <h3 class="mcard__name">{m.name}</h3>
+          <div class="mcard__role">{m.role}</div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .masters {
+    padding: 160px 0;
+    background: var(--color-bg-2);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .masters__head {
+    max-width: 780px;
+    margin-bottom: 80px;
+  }
+  .masters__title { margin: 0 0 28px; }
+  .masters__lead {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(17px, 1.5vw, 20px);
+    line-height: 1.55;
+    color: var(--color-muted);
+    margin: 0;
+    max-width: 560px;
+  }
+
+  .masters__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+
+  .mcard {
+    text-align: left;
+    transition: transform 0.5s cubic-bezier(.22,1,.36,1);
+  }
+  .mcard:hover { transform: translateY(-6px); }
+
+  .mcard__avatar {
+    aspect-ratio: 4/5;
+    background: linear-gradient(160deg, var(--color-surface) 0%, var(--color-bg) 100%);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    transition: background 0.4s, border-color 0.4s;
+  }
+  .mcard:hover .mcard__avatar {
+    background: linear-gradient(160deg, var(--color-surface) 0%, var(--color-brand-soft) 100%);
+    border-color: rgba(162,46,31,0.3);
+  }
+  .mcard__initials {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(72px, 7vw, 120px);
+    line-height: 1;
+    color: var(--color-brand);
+    letter-spacing: -0.05em;
+  }
+
+  .mcard__name {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    margin: 0 0 4px;
+    color: var(--color-text);
+  }
+  .mcard__role {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--color-muted);
+    line-height: 1.5;
+  }
+
+  @media (max-width: 1000px) {
+    .masters__grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 700px) {
+    .masters { padding: 90px 0; }
+    .masters__grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  }
+</style>

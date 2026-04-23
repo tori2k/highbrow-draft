@@ -1,0 +1,268 @@
+---
+const base = import.meta.env.BASE_URL;
+---
+<section class="hero" id="top">
+  <div class="container-x hero__inner">
+    <div class="hero__meta">
+      <span class="hero__meta-tag">Москва · с 2019</span>
+      <span class="hero__meta-loc">Малый Кисловский 7 · Мясницкая 41</span>
+    </div>
+
+    <h1 class="hero__title">
+      <span class="tr-line hero__line" aria-label="Бьюти-">
+        <span class="tr-char" style="--i:0">Б</span><span class="tr-char" style="--i:1">ь</span><span class="tr-char" style="--i:2">ю</span><span class="tr-char" style="--i:3">т</span><span class="tr-char" style="--i:4">и</span><span class="tr-char" style="--i:5">-</span>
+      </span>
+      <span class="tr-line hero__line hero__line--italic" aria-label="библиотека">
+        <em><span class="tr-char" style="--i:0">б</span><span class="tr-char" style="--i:1">и</span><span class="tr-char" style="--i:2">б</span><span class="tr-char" style="--i:3">л</span><span class="tr-char" style="--i:4">и</span><span class="tr-char" style="--i:5">о</span><span class="tr-char" style="--i:6">т</span><span class="tr-char" style="--i:7">е</span><span class="tr-char" style="--i:8">к</span><span class="tr-char" style="--i:9">а</span></em>
+      </span>
+      <span class="tr-line hero__line hero__line--small" aria-label="Highbrow">
+        <span class="tr-char" style="--i:0">H</span><span class="tr-char" style="--i:1">i</span><span class="tr-char" style="--i:2">g</span><span class="tr-char" style="--i:3">h</span><span class="tr-char" style="--i:4">b</span><span class="tr-char" style="--i:5">r</span><span class="tr-char" style="--i:6">o</span><span class="tr-char" style="--i:7">w</span>
+      </span>
+    </h1>
+
+    <div class="hero__bottom">
+      <p class="hero__manifest reveal">
+        Выступаем за&nbsp;<em>естественные брови</em>, природную ширину и&nbsp;лёгкость.<br/>
+        Работаем деликатно, без&nbsp;шаблонов — так, как идёт именно вам.
+      </p>
+
+      <div class="hero__actions reveal">
+        <span class="magnet">
+          <a href="https://b692514.yclients.com" target="_blank" rel="noopener" class="btn btn--brand" data-hover>
+            Записаться онлайн
+            <span class="btn__arrow">→</span>
+          </a>
+        </span>
+        <a href="#services" class="hero__scroll" data-hover>
+          <span>Смотреть услуги</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero__photos" aria-hidden="true">
+    <div class="hero__photo hero__photo--left" data-parallax="0.06">
+      <img src={`${base}media/hero-interior.jpg`} alt="Интерьер студии Highbrow" loading="eager" fetchpriority="high" />
+    </div>
+    <div class="hero__photo hero__photo--right" data-parallax="-0.04">
+      <img src={`${base}media/lamp-mirror.jpg`} alt="Уголок студии — лампа и зеркало" loading="eager" />
+    </div>
+  </div>
+
+  <!-- Marquee with services -->
+  <div class="hero__marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Брови</span><span>·</span>
+      <span>Ресницы</span><span>·</span>
+      <span>Волосы</span><span>·</span>
+      <span>Ногтевой сервис</span><span>·</span>
+      <span>Макияж</span><span>·</span>
+      <span>Обучение</span><span>·</span>
+      <!-- duplicate for seamless -->
+      <span>Брови</span><span>·</span>
+      <span>Ресницы</span><span>·</span>
+      <span>Волосы</span><span>·</span>
+      <span>Ногтевой сервис</span><span>·</span>
+      <span>Макияж</span><span>·</span>
+      <span>Обучение</span><span>·</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    padding: 120px 0 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .hero__inner {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    flex: 1;
+    padding-top: 40px;
+    padding-bottom: 80px;
+  }
+
+  .hero__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .hero__meta-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero__meta-tag::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-brand);
+  }
+
+  .hero__title {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(68px, 14.5vw, 240px);
+    line-height: 0.86;
+    letter-spacing: -0.035em;
+    color: var(--color-text);
+    margin: 20px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.02em;
+  }
+  .hero__line { display: block; overflow: hidden; padding: 0.02em 0; }
+  .hero__line--italic {
+    font-style: italic;
+    color: var(--color-brand);
+    font-weight: 300;
+    padding-left: 0.2em;
+  }
+  .hero__line--small {
+    font-size: 0.32em;
+    letter-spacing: 0.05em;
+    color: var(--color-muted);
+    font-weight: 400;
+    text-transform: uppercase;
+    margin-top: 0.5em;
+    padding-left: 0.4em;
+  }
+
+  .hero__bottom {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: end;
+    margin-top: auto;
+    padding-top: 60px;
+  }
+  .hero__manifest {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(17px, 1.6vw, 22px);
+    line-height: 1.5;
+    color: var(--color-text-soft);
+    max-width: 560px;
+    margin: 0;
+  }
+  .hero__manifest em {
+    font-style: italic;
+    color: var(--color-brand);
+    font-weight: 400;
+  }
+  .hero__actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-self: end;
+  }
+  .hero__scroll {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .hero__scroll svg {
+    transition: transform 0.3s;
+  }
+  .hero__scroll:hover { color: var(--color-text); }
+  .hero__scroll:hover svg { transform: translateY(3px); }
+
+  /* Floating photos */
+  .hero__photos {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .hero__photo {
+    position: absolute;
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: 0 30px 80px rgba(26,26,26,0.18);
+  }
+  .hero__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .hero__photo--left {
+    top: 18%;
+    right: 6%;
+    width: 18vw;
+    min-width: 220px;
+    max-width: 320px;
+    aspect-ratio: 3/4;
+  }
+  .hero__photo--right {
+    bottom: 14%;
+    right: 22%;
+    width: 14vw;
+    min-width: 160px;
+    max-width: 240px;
+    aspect-ratio: 3/4;
+  }
+
+  /* Marquee bottom */
+  .hero__marquee {
+    overflow: hidden;
+    padding: 24px 0;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    position: relative;
+    z-index: 2;
+    background: var(--color-bg);
+  }
+  .marquee-track {
+    display: inline-flex;
+    gap: 40px;
+    white-space: nowrap;
+    animation: marquee 38s linear infinite;
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(28px, 3.5vw, 48px);
+    color: var(--color-text);
+  }
+  .marquee-track span:nth-child(even) {
+    color: var(--color-brand);
+    font-style: italic;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @media (max-width: 900px) {
+    .hero__bottom { grid-template-columns: 1fr; }
+    .hero__actions { justify-self: start; }
+    .hero__photo--left { width: 30vw; top: auto; bottom: 38%; right: 6%; }
+    .hero__photo--right { display: none; }
+  }
+  @media (max-width: 600px) {
+    .hero__photo--left { opacity: 0.35; }
+  }
+</style>

@@ -1,0 +1,93 @@
+---
+---
+<section class="cta" id="contact">
+  <div class="container-x cta__inner">
+    <div class="cta__line reveal"><span class="sec-tag">Онлайн-запись · Yclients</span></div>
+    <h2 class="cta__title">
+      <span data-tr>Приходите</span>
+      <span class="cta__line-italic" data-tr>познакомиться</span>
+    </h2>
+    <p class="cta__lead reveal">
+      Выберите удобное время и&nbsp;мастера — запись подтвердим за&nbsp;5&nbsp;минут.
+    </p>
+    <div class="cta__actions reveal">
+      <span class="magnet">
+        <a href="https://b692514.yclients.com" target="_blank" rel="noopener" class="btn btn--brand" data-hover>
+          Записаться онлайн
+          <span class="btn__arrow">→</span>
+        </a>
+      </span>
+      <a href="https://t.me/highbrow_msk" target="_blank" rel="noopener" class="cta__tg" data-hover>
+        или написать в&nbsp;Telegram
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    padding: 200px 0 160px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta__inner {
+    position: relative;
+    z-index: 1;
+  }
+  .cta__line .sec-tag {
+    justify-content: center;
+    width: 100%;
+  }
+  .cta__title {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(56px, 10vw, 160px);
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    margin: 0 0 40px;
+    color: var(--color-text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .cta__line-italic {
+    font-style: italic;
+    color: var(--color-brand);
+  }
+
+  .cta__lead {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(17px, 1.5vw, 20px);
+    line-height: 1.55;
+    color: var(--color-muted);
+    max-width: 500px;
+    margin: 0 auto 48px;
+  }
+  .cta__actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+  .cta__tg {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--color-muted);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--color-muted-2);
+    padding-bottom: 3px;
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .cta__tg:hover {
+    color: var(--color-brand);
+    border-color: var(--color-brand);
+  }
+
+  @media (max-width: 700px) {
+    .cta { padding: 110px 0 80px; }
+  }
+</style>

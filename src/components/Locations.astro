@@ -1,0 +1,171 @@
+---
+const base = import.meta.env.BASE_URL;
+
+const locations = [
+  {
+    name: 'Кисловский',
+    address: 'Малый Кисловский переулок, 7',
+    metro: 'Арбатская · Александровский сад · Никитские Ворота',
+    hours: 'Ежедневно, 10:00 — 22:00',
+    yandexUrl: 'https://yandex.ru/maps/org/highbrow/192249840698/',
+    photo: 'entrance.jpg',
+  },
+  {
+    name: 'Мясницкая',
+    address: 'Мясницкая, 41, офис 22, 2 этаж',
+    metro: 'Чистые пруды — 5 минут пешком',
+    hours: 'Ежедневно, 10:00 — 22:00',
+    yandexUrl: 'https://yandex.ru/maps/',
+    photo: 'atmosphere-2.jpg',
+  },
+];
+---
+<section class="locations" id="locations">
+  <div class="container-x">
+    <div class="locations__head reveal">
+      <div class="sec-tag">Адреса</div>
+      <h2 class="display-h">
+        Две точки<br/>
+        в&nbsp;<em>центре</em> Москвы
+      </h2>
+    </div>
+
+    <div class="locations__grid">
+      {locations.map((l, i) => (
+        <a href={l.yandexUrl} target="_blank" rel="noopener" class="loc reveal" data-hover style={`transition-delay: ${i * 0.1}s`}>
+          <div class="loc__photo">
+            <img src={`${base}media/${l.photo}`} alt={l.name} loading="lazy" />
+          </div>
+          <div class="loc__body">
+            <div class="loc__num">0{i + 1} / Highbrow</div>
+            <h3 class="loc__name">{l.name}</h3>
+            <div class="loc__rows">
+              <div class="loc__row">
+                <span class="loc__label">Адрес</span>
+                <span class="loc__value">{l.address}</span>
+              </div>
+              <div class="loc__row">
+                <span class="loc__label">Метро</span>
+                <span class="loc__value">{l.metro}</span>
+              </div>
+              <div class="loc__row">
+                <span class="loc__label">Часы</span>
+                <span class="loc__value">{l.hours}</span>
+              </div>
+            </div>
+            <span class="loc__cta">
+              Открыть на Яндекс.Картах
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17L17 7M8 7h9v9"/></svg>
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .locations { padding: 160px 0; background: var(--color-bg-2); border-top: 1px solid var(--color-border); }
+  .locations__head {
+    max-width: 900px;
+    margin: 0 auto 80px;
+    text-align: center;
+  }
+  .locations__head .sec-tag { justify-content: center; width: 100%; }
+
+  .locations__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+
+  .loc {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(.22,1,.36,1);
+  }
+  .loc:hover {
+    border-color: rgba(162,46,31,0.4);
+    transform: translateY(-6px);
+    box-shadow: 0 30px 60px rgba(26,26,26,0.08);
+  }
+  .loc__photo {
+    aspect-ratio: 16/10;
+    overflow: hidden;
+  }
+  .loc__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s cubic-bezier(.22,1,.36,1);
+  }
+  .loc:hover .loc__photo img { transform: scale(1.04); }
+
+  .loc__body { padding: 36px 32px; }
+  .loc__num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--color-brand);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .loc__name {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(36px, 4vw, 56px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin: 0 0 28px;
+    color: var(--color-text);
+  }
+  .loc__rows {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-border);
+  }
+  .loc__row {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+  .loc__label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--color-muted-2);
+    text-transform: uppercase;
+    padding-top: 4px;
+  }
+  .loc__value {
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--color-text-soft);
+  }
+  .loc__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-brand);
+    transition: gap 0.3s;
+  }
+  .loc:hover .loc__cta { gap: 14px; }
+
+  @media (max-width: 900px) {
+    .locations { padding: 90px 0; }
+    .locations__grid { grid-template-columns: 1fr; }
+  }
+</style>

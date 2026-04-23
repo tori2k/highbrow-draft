@@ -1,0 +1,230 @@
+---
+const base = import.meta.env.BASE_URL;
+
+const services = [
+  {
+    num: '01',
+    name: 'Брови',
+    tagline: 'Природная ширина, естественная форма',
+    desc: 'Архитектура, коррекция, окрашивание, долговременная укладка. Работаем деликатно — без шаблонов и трендов на квадрат.',
+    items: ['Коррекция и окрашивание', 'Долговременная укладка', 'Ламинирование', 'Салонный уход'],
+    img: 'brows-before-after.jpg',
+    priceFrom: 'от 3 500 ₽',
+  },
+  {
+    num: '02',
+    name: 'Ресницы',
+    tagline: 'Объёмы от классики до плотного 3D',
+    desc: 'Наращивание классика / 2D / 3D, ламинирование с окрашиванием. Подбираем эффект под форму глаза.',
+    items: ['Классика 1Д', 'Объёмы 2D / 3D', 'Wow-ламинирование', 'Снятие и уход'],
+    img: 'atmosphere-1.jpg',
+    priceFrom: 'от 3 200 ₽',
+  },
+  {
+    num: '03',
+    name: 'Волосы',
+    tagline: 'Стрижки, укладки и уроки',
+    desc: 'Женские, мужские и детские стрижки. Окрашивание, укладки, уроки с пост-консультацией — чтобы повторить дома.',
+    items: ['Стрижка и укладка', 'Окрашивание', 'Урок по укладке + консультация', 'Детские стрижки'],
+    img: 'palette.jpg',
+    priceFrom: 'от 4 500 ₽',
+  },
+  {
+    num: '04',
+    name: 'Ногтевой сервис',
+    tagline: 'Маникюр и педикюр на Luxio',
+    desc: 'Маникюр с покрытием гель-лаком, педикюр с обработкой пальцев и стопы. Сертифицированные материалы.',
+    items: ['Маникюр + гель-лак', 'Педикюр комплексный', 'Укрепление', 'Снятие'],
+    img: 'chair-lamp.jpg',
+    priceFrom: '5 500 ₽',
+  },
+  {
+    num: '05',
+    name: 'Макияж',
+    tagline: 'Повседневный, вечерний, свадебный',
+    desc: 'Макияж от Дарьи — по отзывам «просто золото». Под ваши черты, не трендовый шаблон.',
+    items: ['Дневной', 'Вечерний', 'Свадебный', 'Съёмочный'],
+    img: 'master-working.jpg',
+    priceFrom: 'от 5 000 ₽',
+  },
+];
+---
+<section class="services" id="services">
+  <div class="container-x">
+    <div class="services__head reveal">
+      <div class="sec-tag">Услуги</div>
+      <h2 class="display-h">
+        Всё, что нужно<br/>
+        для <em>вашего образа</em>
+      </h2>
+    </div>
+
+    <div class="services__list">
+      {services.map((s, i) => (
+        <article class="srv reveal" style={`transition-delay: ${i * 0.08}s`}>
+          <div class="srv__media">
+            <img
+              src={`${base}media/${s.img}`}
+              alt={s.name}
+              loading="lazy"
+              decoding="async"
+            />
+            <span class="srv__num">{s.num}</span>
+          </div>
+          <div class="srv__body">
+            <div class="srv__head">
+              <h3 class="srv__name">{s.name}</h3>
+              <span class="srv__price">{s.priceFrom}</span>
+            </div>
+            <div class="srv__tagline">{s.tagline}</div>
+            <p class="srv__desc">{s.desc}</p>
+            <ul class="srv__items">
+              {s.items.map((it) => <li>{it}</li>)}
+            </ul>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .services { padding: 160px 0; }
+  .services__head {
+    max-width: 900px;
+    margin: 0 auto 80px;
+    text-align: center;
+  }
+  .services__head .sec-tag {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .services__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .srv {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 80px;
+    align-items: center;
+    padding: 80px 0;
+    border-top: 1px solid var(--color-border);
+  }
+  .srv:last-child { border-bottom: 1px solid var(--color-border); }
+  .srv:nth-child(even) {
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+  .srv:nth-child(even) .srv__media { order: 2; }
+  .srv:nth-child(even) .srv__body { order: 1; }
+
+  .srv__media {
+    position: relative;
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+  .srv__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s cubic-bezier(.22,1,.36,1);
+  }
+  .srv:hover .srv__media img { transform: scale(1.04); }
+  .srv__num {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #fff;
+    padding: 6px 12px;
+    background: rgba(26,26,26,0.5);
+    backdrop-filter: blur(8px);
+    border-radius: 999px;
+  }
+
+  .srv__body {
+    padding: 20px 0;
+  }
+  .srv__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .srv__name {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(40px, 5vw, 72px);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin: 0;
+    color: var(--color-text);
+  }
+  .srv__price {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    color: var(--color-brand);
+    text-transform: uppercase;
+  }
+  .srv__tagline {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(18px, 1.6vw, 22px);
+    color: var(--color-brand);
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+  .srv__desc {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--color-muted);
+    margin: 0 0 24px;
+    max-width: 520px;
+  }
+  .srv__items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 24px;
+  }
+  .srv__items li {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--color-text-soft);
+    padding-left: 18px;
+    position: relative;
+  }
+  .srv__items li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 10px;
+    width: 8px;
+    height: 1px;
+    background: var(--color-brand);
+  }
+
+  @media (max-width: 900px) {
+    .services { padding: 90px 0; }
+    .srv, .srv:nth-child(even) {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      padding: 50px 0;
+    }
+    .srv:nth-child(even) .srv__media { order: 0; }
+    .srv:nth-child(even) .srv__body { order: 0; }
+    .srv__items { grid-template-columns: 1fr; }
+  }
+</style>

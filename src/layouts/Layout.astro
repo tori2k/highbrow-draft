@@ -1,0 +1,189 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Highbrow — Бьюти-библиотека в Москве',
+  description = 'Брови, ресницы, волосы, ногтевой сервис и макияж. Два адреса в центре Москвы. Обучение мастеров.',
+} = Astro.props;
+---
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="theme-color" content="#f5f1e8" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:locale" content="ru_RU" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Custom cursor -->
+  <div class="cursor" id="cursor" aria-hidden="true">
+    <div class="cursor__dot"></div>
+    <div class="cursor__ring"></div>
+  </div>
+
+  <slot />
+
+  <style is:global>
+    .cursor {
+      position: fixed;
+      top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: difference;
+      transition: opacity 0.25s;
+    }
+    @media (hover: none) { .cursor { display: none; } }
+
+    .cursor__dot {
+      position: fixed;
+      top: 0; left: 0;
+      width: 6px; height: 6px;
+      background: #fff;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.25s, height 0.25s;
+    }
+    .cursor__ring {
+      position: fixed;
+      top: 0; left: 0;
+      width: 32px; height: 32px;
+      border: 1px solid #fff;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.35s cubic-bezier(.22,1,.36,1), height 0.35s cubic-bezier(.22,1,.36,1), border-width 0.3s;
+    }
+    .cursor.hover .cursor__dot { width: 0; height: 0; }
+    .cursor.hover .cursor__ring { width: 70px; height: 70px; border-width: 1.5px; }
+  </style>
+
+  <script>
+    import Lenis from 'lenis';
+
+    // Smooth scroll
+    const lenis = new Lenis({
+      duration: 1.25,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+    });
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+    (window as any).lenis = lenis;
+
+    // Anchor links support
+    document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((a) => {
+      a.addEventListener('click', (e) => {
+        const href = a.getAttribute('href');
+        if (!href || href === '#') return;
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          lenis.scrollTo(target as HTMLElement, { offset: -40 });
+        }
+      });
+    });
+
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -80px 0px' });
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-up, .tr-line').forEach((el) => io.observe(el));
+
+    // Split text into chars for .tr-line elements (auto)
+    document.querySelectorAll<HTMLElement>('[data-tr]').forEach((el) => {
+      const text = el.textContent || '';
+      el.innerHTML = '';
+      const line = document.createElement('span');
+      line.className = 'tr-line';
+      [...text].forEach((ch, i) => {
+        const s = document.createElement('span');
+        s.className = 'tr-char';
+        s.style.setProperty('--i', String(i));
+        s.textContent = ch === ' ' ? ' ' : ch;
+        line.appendChild(s);
+      });
+      el.appendChild(line);
+      io.observe(line);
+    });
+
+    // Custom cursor
+    const cursor = document.getElementById('cursor');
+    const dot = cursor?.querySelector<HTMLElement>('.cursor__dot');
+    const ring = cursor?.querySelector<HTMLElement>('.cursor__ring');
+    if (cursor && dot && ring && window.matchMedia('(hover: hover)').matches) {
+      let mx = 0, my = 0, rx = 0, ry = 0;
+      document.addEventListener('mousemove', (e) => {
+        mx = e.clientX; my = e.clientY;
+        dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
+      });
+      const raf2 = () => {
+        rx += (mx - rx) * 0.2;
+        ry += (my - ry) * 0.2;
+        ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
+        requestAnimationFrame(raf2);
+      };
+      raf2();
+      document.querySelectorAll('a, button, [data-hover]').forEach((el) => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+      });
+      document.addEventListener('mouseleave', () => { cursor.style.opacity = '0'; });
+      document.addEventListener('mouseenter', () => { cursor.style.opacity = '1'; });
+    }
+
+    // Magnetic buttons
+    document.querySelectorAll<HTMLElement>('.magnet').forEach((el) => {
+      const strength = 0.35;
+      el.addEventListener('mousemove', (e) => {
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        el.style.transform = `translate(${x * strength}px, ${y * strength}px)`;
+      });
+      el.addEventListener('mouseleave', () => {
+        el.style.transform = 'translate(0, 0)';
+      });
+    });
+
+    // Parallax on elements with data-parallax="0.1" (speed)
+    const parallaxEls = document.querySelectorAll<HTMLElement>('[data-parallax]');
+    if (parallaxEls.length) {
+      const onScroll = () => {
+        const y = window.scrollY;
+        parallaxEls.forEach((el) => {
+          const speed = parseFloat(el.dataset.parallax || '0.1');
+          const rect = el.getBoundingClientRect();
+          const centerOffset = rect.top + rect.height / 2 - window.innerHeight / 2;
+          el.style.transform = `translateY(${-centerOffset * speed}px)`;
+        });
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
+  </script>
+</body>
+</html>
